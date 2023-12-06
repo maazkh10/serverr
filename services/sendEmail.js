@@ -6,12 +6,12 @@ const generateOTP = require("./generateOTP");
 dotenv.config();
 
 let transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  host: process.SMTP_HOST,
+  port: process.SMTP_PORT,
   secure: false,
   auth: {
-    user: process.env.SMTP_MAIL,
-    pass: process.env.SMTP_PASSWORD,
+    user: process.SMTP_MAIL,
+    pass: process.SMTP_PASSWORD,
   },
   debug: true, // Enable debugging
 });
@@ -29,7 +29,7 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
     }
 
     var mailOptions = {
-      from: process.env.SMTP_MAIL,
+      from: process.SMTP_MAIL,
       to: email,
       subject: "Test Email",
       text: `This is a test email. Your OTP is: ${otp}`,
